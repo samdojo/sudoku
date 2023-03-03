@@ -1,7 +1,10 @@
+#pragma once
+
 #include <cstddef>
 #include <iostream>
 
 #include "cell.h"
+#include "board_iterators.h"
 
 
 constexpr size_t BOARD_LENGTH = 9;
@@ -12,8 +15,13 @@ struct Board
   std::string to_str() const;
   void clear();
 
+  ColIterator getColIter(uint8_t col);
+  RowIterator getRowIter(uint8_t row);
+  BoxIterator getBoxIter(uint8_t row);
+
+private:
   Cell cells[BOARD_LENGTH][BOARD_LENGTH]; // y, x
 
-  
-  friend std::ostream& operator <<(std::ostream& os, Board const board);
+public:
+  friend std::ostream& operator<<(std::ostream& os, Board const board);
 };

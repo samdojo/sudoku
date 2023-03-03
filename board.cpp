@@ -65,6 +65,22 @@ void Board::clear()
   }
 }
 
+ColIterator Board::getColIter(uint8_t col)
+{
+  return ColIterator(cells[0][col]);
+}
+
+RowIterator Board::getRowIter(uint8_t row)
+{
+  return RowIterator(cells[row][0]);
+}
+
+BoxIterator Board::getBoxIter(uint8_t box)
+{
+  // FIXME
+  return BoxIterator(cells[0][0]);
+}
+
 std::ostream& operator<<(std::ostream& os, Board const board) {
   os << board.to_str();
   return os;

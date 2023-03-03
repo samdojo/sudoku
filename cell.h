@@ -1,14 +1,18 @@
+#pragma once
+
 #include <cstddef>
 #include <stdint.h>
+#include <iostream>
 
 
-class Cell {
-protected:
-  uint8_t value;
+struct Cell
+{
+  inline uint8_t const & getValue() { return value; }
 
-public:
   void operator=(char c);
   void operator=(uint8_t c);
-  friend std::ostream& operator <<(std::ostream& os, Cell const cell);
-};
+  friend std::ostream& operator<<(std::ostream& os, Cell const cell);
 
+protected:
+  uint8_t value;
+};
