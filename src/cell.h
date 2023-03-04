@@ -7,6 +7,8 @@
 
 struct Cell
 {
+  Cell();
+  Cell(char c);
   inline uint8_t const & getValue() { return value; }
 
   void operator=(char c);

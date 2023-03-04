@@ -5,7 +5,7 @@
 
 struct Iterator
 {
-  Iterator(Cell cell);
+  Iterator(Cell* cell);
   virtual void operator++(int) = 0; // do not call more than 8 times
   Cell& operator*();
 protected:

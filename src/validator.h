@@ -4,7 +4,7 @@
 #include "board.h"
 #include "board_iterators.h"
 
-class Validator
+struct Validator
 {
-  bool isValid(Iterator& it);
+  static bool isValid(Iterator& it);
 };

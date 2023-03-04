@@ -1,19 +1,28 @@
 #include "validator.h"
 
 
-bool isValid(Iterator& it)
+bool Validator::isValid(Iterator& it)
 {
-  bool is_in_row[] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+  // TODO: see if using 9 values here instead of 10
+  // and using index - 1 below improves or degrades
+  // performance
+  bool is_in_row[] = {
+    false, false, false, false, false,
+    false, false, false, false, false};
+
   for (int i = 0; i < BOARD_LENGTH; ++i)
   {
     uint8_t const & index = (*it).getValue();
-    if (is_in_row[index])
+    if (index != 0) // cell is not empty
     {
-      return false;
-    }
-    else
-    {
-      is_in_row[index] = true;
+      if (is_in_row[index])
+      {
+        return false;
+      }
+      else
+      {
+        is_in_row[index] = true;
+      }
     }
     it++;
   }

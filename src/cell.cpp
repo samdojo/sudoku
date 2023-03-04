@@ -2,6 +2,15 @@
 
 #include "Cell.h"
 
+Cell::Cell()
+{
+}
+
+Cell::Cell(char c)
+{
+  *this = c;
+}
+
 void Cell::operator=(char c)
 {
   value = (c < '9' && c > '0') ? c - '0' : 0;
