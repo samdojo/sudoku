@@ -1,7 +1,7 @@
 #include "validator.h"
 
 
-bool Validator::isValid(Iterator& it)
+bool Validator::isGroupValid(Iterator& it)
 {
   // TODO: see if using 9 values here instead of 10
   // and using index - 1 below improves or degrades
@@ -25,6 +25,26 @@ bool Validator::isValid(Iterator& it)
       }
     }
     it++;
+  }
+  return true;
+}
+
+bool Validator::isBoardValid(Board& board)
+{
+  for (uint8_t i = 0; i < BOARD_LENGTH; ++i) {
+    RowIterator rowIt = board.getRowIter(i);
+    if (!isGroupValid(rowIt)) {
+      return false;
+    }
+
+    ColIterator colIt = board.getColIter(i);
+    if (!isGroupValid(colIt)) {
+      return false;
+    }
+    BoxIterator boxIt = board.getBoxIter(i);
+    if (!isGroupValid(boxIt)) {
+      return false;
+    }
   }
   return true;
 }

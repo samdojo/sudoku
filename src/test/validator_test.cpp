@@ -24,44 +24,51 @@ namespace {
   };
 }
 
-TEST(Validator, Empty)
+TEST(ValidateGroup, Empty)
 {
   TestIt it({0, 0, 0, 0, 0, 0, 0, 0, 0});
 
-  EXPECT_TRUE(Validator::isValid(it));
+  EXPECT_TRUE(Validator::isGroupValid(it));
 }
 
-TEST(Validator, Simple)
+TEST(ValidateGroup, Simple)
 {
   TestIt it({1, 2, 3, 4, 5, 6, 7, 8, 9});
 
-  EXPECT_TRUE(Validator::isValid(it));
+  EXPECT_TRUE(Validator::isGroupValid(it));
 }
 
-TEST(Validator, FullValid)
+TEST(ValidateGroup, FullValid)
 {
   TestIt it({7, 2, 8, 1, 6, 3, 5, 4, 9});
 
-  EXPECT_TRUE(Validator::isValid(it));
+  EXPECT_TRUE(Validator::isGroupValid(it));
 }
 
-TEST(Validator, HalfFullValid)
+TEST(ValidateGroup, HalfFullValid)
 {
   TestIt it({9, 2, 0, 4, 6, 0, 5, 0, 0});
 
-  EXPECT_TRUE(Validator::isValid(it));
+  EXPECT_TRUE(Validator::isGroupValid(it));
 }
 
-TEST(Validator, FullInvalid)
+TEST(ValidateGroup, FullInvalid)
 {
   TestIt it({7, 2, 8, 1, 6, 3, 5, 4, 1});
 
-  EXPECT_FALSE(Validator::isValid(it));
+  EXPECT_FALSE(Validator::isGroupValid(it));
 }
 
-TEST(Validator, HalfFullInvalid)
+TEST(ValidateGroup, HalfFullInvalid)
 {
   TestIt it({5, 2, 0, 4, 6, 0, 5, 0, 0});
 
-  EXPECT_FALSE(Validator::isValid(it));
+  EXPECT_FALSE(Validator::isGroupValid(it));
+}
+
+TEST(ValidateBoard, Empty)
+{
+  Board board;
+  board.clear();
+  EXPECT_TRUE(Validator::isBoardValid(board));
 }

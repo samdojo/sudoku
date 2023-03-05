@@ -6,5 +6,6 @@
 
 struct Validator
 {
-  static bool isValid(Iterator& it);
+  static bool isGroupValid(Iterator& it);
+  static bool isBoardValid(Board& board);
 };
