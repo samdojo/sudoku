@@ -77,8 +77,7 @@ RowIterator Board::getRowIter(uint8_t row)
 
 BoxIterator Board::getBoxIter(uint8_t box)
 {
-  // FIXME
-  return BoxIterator(cells[0][0]);
+  return BoxIterator(cells[(box / 3) * 3][(box % 3) * 3]);
 }
 
 std::ostream& operator<<(std::ostream& os, Board const board) {

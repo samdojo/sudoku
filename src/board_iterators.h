@@ -14,18 +14,20 @@ protected:
 
 struct ColIterator : public Iterator
 {
-  ColIterator(Cell cell);
+  ColIterator(Cell& cell);
   void operator++(int) override;
 };
 
 struct RowIterator : public Iterator
 {
-  RowIterator(Cell cell);
+  RowIterator(Cell& cell);
   void operator++(int) override;
 };
 
 struct BoxIterator : public Iterator
 {
-  BoxIterator(Cell cell);
+  BoxIterator(Cell& cell);
   void operator++(int) override;
+private:
+  uint8_t cell_num = 0;
 };
