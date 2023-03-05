@@ -30,7 +30,7 @@ void Board::load(char const * file_name)
   file.close();
 }
 
-std::string Board::to_str() const
+std::string Board::toStr() const
 {
   std::stringstream ss;
   for (int y = 0; y < BOARD_LENGTH; ++y)
@@ -81,6 +81,6 @@ BoxIterator Board::getBoxIter(uint8_t box)
 }
 
 std::ostream& operator<<(std::ostream& os, Board const board) {
-  os << board.to_str();
+  os << board.toStr();
   return os;
 }

@@ -12,7 +12,7 @@ constexpr size_t BOARD_LENGTH = 9;
 struct Board
 {
   void load(char const * file_name);
-  std::string to_str() const;
+  std::string toStr() const;
   void clear();
 
   ColIterator getColIter(uint8_t col);
