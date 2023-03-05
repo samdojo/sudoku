@@ -2,8 +2,7 @@
 
 int main() {
   Board board;
-  board.clear();
-  board.load("sudoku-puzzle-1.txt");
+  board.load("boards/sudoku-puzzle-1.txt");
   std::cout << board;
 
   return 0;
