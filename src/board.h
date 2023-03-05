@@ -19,6 +19,8 @@ struct Board
   RowIterator getRowIter(uint8_t row);
   BoxIterator getBoxIter(uint8_t row);
 
+  Cell* getNextEmptyCell(); // returns nullptr is Board is full
+
 private:
   Cell cells[BOARD_LENGTH][BOARD_LENGTH]; // y, x
 

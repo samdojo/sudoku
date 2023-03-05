@@ -80,6 +80,21 @@ BoxIterator Board::getBoxIter(uint8_t box)
   return BoxIterator(cells[(box / 3) * 3][(box % 3) * 3]);
 }
 
+Cell* Board::getNextEmptyCell()
+{
+  for (int y = 0; y < BOARD_LENGTH; ++y)
+  {
+    for (int x = 0; x < BOARD_LENGTH; ++x)
+    {
+      if (cells[y][x].getValue() == 0)
+      {
+        return &cells[y][x];
+      }
+    }
+  }
+  return nullptr;
+}
+
 std::ostream& operator<<(std::ostream& os, Board const board) {
   os << board.toStr();
   return os;
