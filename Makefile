@@ -1,6 +1,6 @@
 all: solver test
 
-solver: src/*.cpp
+solver: src/*.cpp src/main/main.cpp
 	g++ src/*.cpp src/main/main.cpp -std=c++2a -g -o solver -Isrc/
 
 clean:
