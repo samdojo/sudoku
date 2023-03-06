@@ -2,28 +2,29 @@
 #include "validator.h"
 
 
-std::pair<bool, Board> Solver::solve(Board board)
+bool Solver::solve(Board board)
 {
   if (!Validator::isBoardValid(board))
   {
-    return std::make_pair(false, board);
+    return false;
   }
   Cell* cell = board.getNextEmptyCell();
   if (cell == nullptr)
   {
-    return std::make_pair(true, board);
+    solvedBoard = board;
+    return true;
   }
   else
   {
     for (uint8_t i = 1; i < BOARD_LENGTH + 1; ++i)
     {
       *cell = i;
-      auto [solved, new_board] = solve(board);
+      bool solved = solve(board);
       if (solved)
       {
-        return std::make_pair(solved, new_board);
+        return true;
       }
     }
-    return std::make_pair(false, board);
+    return false;
   }
 }

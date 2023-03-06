@@ -3,5 +3,6 @@
 
 struct Solver
 {
-  static std::pair<bool, Board> solve(Board board);
+  bool solve(Board board);
+  Board solvedBoard;
 };
