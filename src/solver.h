@@ -3,6 +3,5 @@
 
 struct Solver
 {
-  bool solve(Board board);
-  Board solvedBoard;
+  static bool solve(Board& board);
 };

@@ -2,7 +2,7 @@
 #include "validator.h"
 
 
-bool Solver::solve(Board board)
+bool Solver::solve(Board& board)
 {
   if (!Validator::isBoardValid(board))
   {
@@ -11,7 +11,6 @@ bool Solver::solve(Board board)
   Cell* cell = board.getNextEmptyCell();
   if (cell == nullptr)
   {
-    solvedBoard = board;
     return true;
   }
   else
@@ -25,6 +24,7 @@ bool Solver::solve(Board board)
         return true;
       }
     }
+    *cell = uint8_t(0);
     return false;
   }
 }
