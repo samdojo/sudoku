@@ -1,10 +1,10 @@
 all: solver test
 
-solver: src/*.cpp src/main/main.cpp
-	g++ src/*.cpp src/main/main.cpp -std=c++2a -g -o solver -Isrc/
+solver: src/ src/main/main.cpp
+	g++ src/*.cpp src/main/main.cpp -std=c++20 -g -o solver -Isrc/
 
 clean:
 	rm -f *.o solver
 
-test: src/*.cpp src/test/*.cpp
-	g++ src/*.cpp src/test/* -lgtest -pthread -lgtest_main -std=c++2a -g -o test -Isrc/
+test: src/* src/test/*
+	g++ src/*.cpp src/test/* -lgtest -pthread -lgtest_main -std=c++20 -g -o test -Isrc/
