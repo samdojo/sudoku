@@ -2,17 +2,22 @@
 
 #include "board.h"
 #include "solver.h"
+#include "real_time_engine.h"
+
 
 int main() {
   Board board;
   board.load("boards/puzzle-1.txt");
   std::cout << board << std::endl;
 
-  auto start = std::chrono::high_resolution_clock::now();
-  bool solved = Solver::solve(board);
-  auto finish = std::chrono::high_resolution_clock::now();
+  auto solve = [] (Board& board)
+  {
+    return Solver::solve(board);
+  };
 
-  int duration = std::chrono::duration_cast<std::chrono::milliseconds>(finish-start).count();
+  auto engine = RealTimeEngine<decltype(solve), Board&>(solve, board);
+  auto [solved, duration] = engine.run();
+
   std::cout << "solved puzzle in " << duration << "ms\n";
 
   if (solved)
