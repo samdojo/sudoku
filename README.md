@@ -12,3 +12,14 @@ A C++20 low-latency sudoku puzzle solver.
 
 #### Dependencies:
 - libgtest-dev: 1.10.0-2
+
+#### System Requirements:
+- a Linux kernel with the PREEMPT_RT patches applied
+
+#### Suggested System configurations:
+- disable simutaneous multithreading (SMT)/hyperthreading
+- disable dynamic frequency scaling
+- disable real-time throttling
+- kill any unneeded real-time processes
+
+For more details on system configurations, see https://shuhaowu.com/blog/2022/02-linux-rt-appdev-part2.html
