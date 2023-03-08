@@ -3,12 +3,17 @@
 #include <cassert>
 #include <sys/mman.h>
 #include <atomic>
+#include <chrono>
+
 
 template<typename Function, typename... ArgTypes>
 class RealTimeEngine
 {
   static constexpr int priority = 80;
   static constexpr int policy = SCHED_FIFO;
+
+  using FunctionReturnType = decltype(std::declval<Function>()(std::declval<ArgTypes>()...));
+  static_assert(!std::is_same<FunctionReturnType, void>::value);
 
 public:
   RealTimeEngine(Function& function, ArgTypes&... args)
@@ -31,19 +36,19 @@ public:
     assert(pthread_create(&thread, &attr, &RealTimeEngine::runThread, this) == 0 && "try running as root");
     assert(pthread_join(thread, NULL) == 0);
 
-    return std::make_pair(this->solved.load(), this->elapsed_ms.load());
+    return std::make_pair(this->return_value.load(), this->elapsed_us.load());
   }
 
 private:
   static void* runThread(void* data) noexcept
   {
     RealTimeEngine* p_this = static_cast<RealTimeEngine*>(data);
-
+  
     auto start = std::chrono::high_resolution_clock::now();
-    p_this->solved = p_this->function(p_this->getArgs());
+    p_this->return_value = p_this->function(p_this->getArgs());
     auto finish = std::chrono::high_resolution_clock::now();
 
-    p_this->elapsed_ms = std::chrono::duration_cast<std::chrono::milliseconds>(finish-start).count();
+    p_this->elapsed_us = std::chrono::duration_cast<std::chrono::microseconds>(finish-start).count();
 
     return NULL;
   }
@@ -56,6 +61,6 @@ private:
   Function& function;
   std::tuple<ArgTypes&...> args;
   pthread_t thread;
-  std::atomic<int> elapsed_ms = 0;
-  std::atomic<bool> solved = false;
+  std::atomic<int> elapsed_us = 0;
+  std::atomic<FunctionReturnType> return_value;
 };

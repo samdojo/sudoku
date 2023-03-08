@@ -9,7 +9,7 @@ bool Solver::solve(Board& board)
     return false;
   }
   Cell* cell = board.getNextEmptyCell();
-  if (cell == nullptr)
+  if (cell == nullptr) [[unlikely]]
   {
     return true;
   }
@@ -19,7 +19,7 @@ bool Solver::solve(Board& board)
     {
       *cell = i;
       bool solved = solve(board);
-      if (solved)
+      if (solved) [[unlikely]]
       {
         return true;
       }

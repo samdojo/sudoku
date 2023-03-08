@@ -41,6 +41,7 @@ bool Validator::isBoardValid(Board& board)
     if (!isGroupValid(colIt)) {
       return false;
     }
+
     BoxIterator boxIt = board.getBoxIter(i);
     if (!isGroupValid(boxIt)) {
       return false;
