@@ -24,7 +24,7 @@ bool Solver::solve(Board& board)
         return true;
       }
     }
-    *cell = uint8_t(0);
+    board.eraseCell(cell);
     return false;
   }
 }

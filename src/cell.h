@@ -13,6 +13,7 @@ struct Cell
 
   void operator=(char c);
   void operator=(uint8_t c);
+  bool operator==(uint8_t c);
   friend std::ostream& operator<<(std::ostream& os, Cell const cell);
 
 protected:

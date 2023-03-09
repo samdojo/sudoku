@@ -2,6 +2,7 @@
 
 #include <cstddef>
 #include <iostream>
+#include <stack>
 
 #include "cell.h"
 #include "board_iterators.h"
@@ -20,9 +21,11 @@ struct Board
   BoxIterator getBoxIter(uint8_t row);
 
   Cell* getNextEmptyCell(); // returns nullptr is Board is full
+  void eraseCell(Cell* cell);
 
 private:
   Cell cells[BOARD_LENGTH][BOARD_LENGTH]; // y, x
+  std::stack<Cell*> emptyCells;
 
 public:
   friend std::ostream& operator<<(std::ostream& os, Board const board);

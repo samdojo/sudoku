@@ -28,6 +28,17 @@ void Board::load(char const * file_name)
     row_num++;
   }
   file.close();
+
+  for (int i = 0; i < BOARD_LENGTH; i++)
+  {
+    for (int j = 0; j < BOARD_LENGTH; j++)
+    {
+      if (cells[i][j] == 0)
+      {
+        emptyCells.push(&cells[i][j]);
+      }
+    }
+  }
 }
 
 std::string Board::toStr() const
@@ -82,17 +93,22 @@ BoxIterator Board::getBoxIter(uint8_t box)
 
 Cell* Board::getNextEmptyCell()
 {
-  for (int y = 0; y < BOARD_LENGTH; ++y)
+  if (!emptyCells.empty()) [[likely]]
   {
-    for (int x = 0; x < BOARD_LENGTH; ++x)
-    {
-      if (cells[y][x].getValue() == 0)
-      {
-        return &cells[y][x];
-      }
-    }
+    Cell* ptr = emptyCells.top();
+    emptyCells.pop();
+    return ptr;
   }
-  return nullptr;
+  else
+  {
+    return nullptr;
+  }
+}
+
+void Board::eraseCell(Cell* cell)
+{
+  *cell = uint8_t(0);
+  emptyCells.push(cell);
 }
 
 std::ostream& operator<<(std::ostream& os, Board const board) {

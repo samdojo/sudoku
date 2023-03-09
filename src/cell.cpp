@@ -21,6 +21,11 @@ void Cell::operator=(uint8_t i)
   value = i;
 }
 
+bool Cell::operator==(uint8_t i)
+{
+  return value == i;
+}
+
 std::ostream& operator<<(std::ostream& os, Cell const cell)
 {
   if (cell.value == 0)
