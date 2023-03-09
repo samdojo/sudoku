@@ -5,6 +5,25 @@
 
 #include "board.h"
 
+namespace
+{
+  uint8_t x(uint8_t box) { return (box % 3) * 3; }
+  uint8_t y(uint8_t box) { return (box / 3) * 3; }
+}
+
+Board::Board()
+: boxIters({BoxIterator(cells[x(0)][y(0)]),
+            BoxIterator(cells[x(1)][y(1)]),
+            BoxIterator(cells[x(2)][y(2)]),
+            BoxIterator(cells[x(3)][y(3)]),
+            BoxIterator(cells[x(4)][y(4)]),
+            BoxIterator(cells[x(5)][y(5)]),
+            BoxIterator(cells[x(6)][y(6)]),
+            BoxIterator(cells[x(7)][y(7)]),
+            BoxIterator(cells[x(8)][y(8)])})
+{
+}
+
 void Board::load(char const * file_name)
 {
   std::ifstream file(file_name);
@@ -88,7 +107,7 @@ RowIterator Board::getRowIter(uint8_t row)
 
 BoxIterator Board::getBoxIter(uint8_t box)
 {
-  return BoxIterator(cells[(box / 3) * 3][(box % 3) * 3]);
+  return boxIters[box];
 }
 
 Cell* Board::getNextEmptyCell()
