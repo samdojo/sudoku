@@ -3,9 +3,14 @@
 #include "real_time_engine.h"
 
 
-int main() {
+int main(int argc, char** argv) {
+  if (argc != 2) {
+    std::cout << "please supply 1 board to solve" << std::endl;
+    return 0;
+  }
+
   Board board;
-  board.load("boards/puzzle-1.txt");
+  board.load(argv[1]);
   std::cout << board << std::endl;
 
   auto solve = [] (Board& board)

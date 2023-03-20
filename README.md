@@ -8,7 +8,7 @@ A C++20 low-latency sudoku puzzle solver.
 - run `$ make`
 
 #### To Run:
-- run `$ sudo ./solver-release` to run puzzle solver
+- run `$ sudo ./solver-release [path/to/puzzle]` to run puzzle solver
 - run `$ ./test` to run unit tests
 
 #### Dependencies:
