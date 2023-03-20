@@ -19,5 +19,5 @@ solver-release: $(SOURCE_FILES) $(HEADER_FILES) $(MAIN_FILE)
 clean:
 	rm -f solver-* test
 
-test: $(SOURCE_FILES) $(HEADER_FILES) $(MAIN_FILE)
+test: $(SOURCE_FILES) $(HEADER_FILES) $(TEST_FILES)
 	$(CC) $(SOURCE_FILES) $(TEST_FILES) $(TEST_LIBS) $(DEBUG_FLAGS)

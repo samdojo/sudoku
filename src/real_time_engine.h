@@ -21,7 +21,7 @@ public:
     , args(args...)
   {}
 
-  std::pair<bool, int> run()
+  std::pair<FunctionReturnType, int> run()
   {
     assert(mlockall(MCL_CURRENT | MCL_FUTURE) == 0);
 
@@ -45,17 +45,12 @@ private:
     RealTimeEngine* p_this = static_cast<RealTimeEngine*>(data);
   
     auto start = std::chrono::high_resolution_clock::now();
-    p_this->return_value = p_this->function(p_this->getArgs());
+    p_this->return_value = std::apply(p_this->function, p_this->args);
     auto finish = std::chrono::high_resolution_clock::now();
 
     p_this->elapsed_us = std::chrono::duration_cast<std::chrono::microseconds>(finish-start).count();
 
     return NULL;
-  }
-
-  auto& getArgs()
-  {
-    return std::get<ArgTypes...>(args);
   }
 
   Function& function;
