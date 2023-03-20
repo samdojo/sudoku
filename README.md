@@ -3,11 +3,12 @@
 A C++20 low-latency sudoku puzzle solver.
 
 #### To build:
-- ensure GCC 10 or higher is installed
+- ensure GCC version 10 or higher is installed
+- ensure GNU Make version 4.3 or higher is installed
 - run `$ make`
 
 #### To Run:
-- run `$ sudo ./solver` to run puzzle solver
+- run `$ sudo ./solver-release` to run puzzle solver
 - run `$ ./test` to run unit tests
 
 #### Dependencies:
