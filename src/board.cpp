@@ -7,8 +7,8 @@
 
 namespace
 {
-  uint8_t x(uint8_t box) { return (box % 3) * 3; }
-  uint8_t y(uint8_t box) { return (box / 3) * 3; }
+  uint8_t x(uint8_t box) { return (box % BOX_LENGTH) * BOX_LENGTH; }
+  uint8_t y(uint8_t box) { return (box / BOX_LENGTH) * BOX_LENGTH; }
 }
 
 Board::Board()
@@ -32,16 +32,16 @@ void Board::load(char const * file_name)
   uint8_t row_num = 0;
   while(getline(file, line))
   {
-    if (line.empty() || line.at(3) == '=')
+    if (line.empty() || line.at(3) == '=') // separator lines have a '=' at index 3
     {
       continue;
     }
     for (int x = 0; x < BOARD_LENGTH; ++x)
     {
+      // skip all of the non-value characters in the text line
       uint8_t c = (x * 4) + 3;
       c += (c - 1) / 12;
-      assert(row_num < 9);
-      assert(x < 9);
+
       cells[row_num][x] = line.at(c);
     }
     row_num++;
@@ -66,13 +66,13 @@ std::string Board::toStr() const
   for (int y = 0; y < BOARD_LENGTH; ++y)
   {
     Cell const* row = cells[y];
-    if (y % 3 == 0)
+    if (y % BOX_LENGTH == 0)
     {
       ss << "||=====================================||\n";
     }
     for (int x = 0; x < BOARD_LENGTH; ++x)
     {
-      if (x % 3 == 0)
+      if (x % BOX_LENGTH == 0)
       {
         ss << '|';
       }

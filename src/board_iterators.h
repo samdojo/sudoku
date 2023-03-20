@@ -29,5 +29,5 @@ struct BoxIterator : public Iterator
   BoxIterator(Cell& cell);
   void operator++(int) override;
 private:
-  uint8_t cell_num = 0;
+  uint8_t box_y = 0;
 };

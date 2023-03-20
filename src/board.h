@@ -10,6 +10,7 @@
 
 
 constexpr size_t BOARD_LENGTH = 9;
+constexpr size_t BOX_LENGTH = 3;
 
 struct Board
 {
